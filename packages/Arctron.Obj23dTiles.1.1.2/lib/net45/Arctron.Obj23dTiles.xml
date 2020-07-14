@@ -1,0 +1,527 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Arctron.Obj23dTiles</name>
+    </assembly>
+    <members>
+        <member name="T:Arctron.Obj23dTiles.B3dm">
+            <summary>
+            b3dm file format model
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.B3dm.#ctor(System.Collections.Generic.List{System.Byte})">
+            <summary>
+            
+            </summary>
+            <param name="glb">binary gltf model</param>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.B3dm.Convert(Arctron.Obj23dTiles.Options)">
+            <summary>
+            convert to b3dm binary data
+            </summary>
+            <param name="options">converting options</param>
+            <returns></returns>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.FeatureTable">
+            <summary>
+            b3dm feature table
+            
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.FeatureTable.BatchLength">
+            <summary>
+            The number of distinguishable models, also called features, in the batch.
+            If the Binary glTF does not have a batchId attribute, this field must be 0.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.FeatureTable.RtcCenter">
+            <summary>
+            A 3-component array of numbers defining the center position
+            when positions are defined relative-to-center
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.GisUtil">
+            <summary>
+            GIS helpers
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.GisUtil.MetersToLongitude(System.Double,System.Double)">
+            <summary>
+            Extent
+            </summary>
+            <param name="meters"></param>
+            <param name="latitude">in radian</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.GisUtil.MetersToLatituide(System.Double)">
+            <summary>
+            Extent
+            </summary>
+            <param name="meters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.GisUtil.LocalFrameToFixedFrame(Arctron.Obj2Gltf.Vec3,Arctron.Obj23dTiles.Ellipsoid,System.String,System.String)">
+            <summary>
+            computes a 4x4 transformation matrix from a reference frame
+            centered at the provided origin to the provided ellipsoid's fixed reference frame.
+            </summary>
+            <param name="firstAxis"></param>
+            <param name="secondAxis"></param>
+            <param name="origin"></param>
+            <param name="ellipsoid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.GisUtil.Wgs84Transform(System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="longitude">longitude in radian</param>
+            <param name="latitude">latitude in radian</param>
+            <param name="height">height in meter</param>
+            <returns></returns>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.Quaternion">
+            <summary>
+            A set of 4-dimensional coordinates used to represent rotation in 3-dimensional space.
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.Quaternion.FromHeadingPitchRoll(Arctron.Obj23dTiles.HeadingPitchRoll)">
+            <summary>
+            Computes a rotation from the given heading, pitch and roll angles. 
+            Heading is the rotation about the negative z axis. 
+            Pitch is the rotation about the negative y axis.
+            Roll is the rotation about the positive x axis.
+            </summary>
+            <param name="hpr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.Matrix4.FromTranslationQuaternionRotationScale(Arctron.Obj2Gltf.Vec3,Arctron.Obj23dTiles.Quaternion,Arctron.Obj2Gltf.Vec3)">
+            <summary>
+            Computes a Matrix4 instance from a translation, rotation, and scale (TRS)
+             representation with the rotation represented as a quaternion.
+            </summary>
+            <param name="translation"></param>
+            <param name="rotation"></param>
+            <param name="scale"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.Ellipsoid">
+            <summary>
+            A quadratic surface defined in Cartesian coordinates by the equation
+            <code>(x / a)^2 + (y / b)^2 + (z / c)^2 = 1</code>.  Primarily used
+            by Cesium to represent the shape of planetary bodies.
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.Ellipsoid.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="x">The radius in the x direction.</param>
+            <param name="y">The radius in the y direction.</param>
+            <param name="z">The radius in the z direction.</param>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.Ellipsoid.CartesianToCartographic(Arctron.Obj2Gltf.Vec3)">
+            <summary>
+            Converts the provided cartesian to cartographic representation.
+            The cartesian is undefined at the center of the ellipsoid.
+            </summary>
+            <param name="xyz"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.Ellipsoid.ScaleToGeodeticSurface(Arctron.Obj2Gltf.Vec3,Arctron.Obj2Gltf.Vec3,Arctron.Obj2Gltf.Vec3,System.Double)">
+            <summary>
+            Scales the provided Cartesian position along the geodetic surface normal
+            so that it is on the surface of this ellipsoid.If the position is
+            at the center of the ellipsoid, this function returns undefined.
+            </summary>
+            <param name="cartesian">The Cartesian position to scale.</param>
+            <param name="oneOverRadii">One over radii of the ellipsoid.</param>
+            <param name="oneOverRadiiSquared">One over radii squared of the ellipsoid.</param>
+            <param name="centerToleranceSquared">Tolerance for closeness to the center.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.Options">
+            <summary>
+            b3dm converting options
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Options.FeatureTableJson">
+            <summary>
+            FeatureTableJson
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Options.FeatureTableBinary">
+            <summary>
+            FeatureTableBinary
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Options.BatchTableJson">
+            <summary>
+            BatchTableJson
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Options.BatchTableBinary">
+            <summary>
+            BatchTableBinary
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.SingleTileset">
+            <summary>
+            represents a tileset.json file
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.SingleTileset.Asset">
+            <summary>
+             asset
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.SingleTileset.Properties">
+            <summary>
+            additional properties
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.SingleTileset.GeometricError">
+            <summary>
+            geometric errors
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.SingleTileset.Root">
+            <summary>
+            tile root (tileset.json or b3dm file)
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.SingleTileset.Create(Arctron.Obj23dTiles.TilesetCreationOptions)">
+            <summary>
+            
+            </summary>
+            <param name="options">options obtained when convert b3dm data</param>
+            <returns></returns>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.Tile">
+            <summary>
+            tile data model
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Tile.Transform">
+            <summary>
+            geo transform
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Tile.BoundingVolume">
+            <summary>
+            bounding
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Tile.GeometricError">
+            <summary>
+            geo error
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Tile.Refine">
+            <summary>
+            ADD or REPLACE
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Tile.Content">
+            <summary>
+            tileset.json or b3dm file
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.Tile.Children">
+            <summary>
+            children tiles
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.TileContent">
+            <summary>
+            tile data
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TileContent.BoundingVolume">
+            <summary>
+            bounding
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TileContent.Url">
+            <summary>
+            tileset.json or b3dm file
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.TilesetAsset">
+            <summary>
+            asset definition
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetAsset.Version">
+            <summary>
+            asset version
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetAsset.TilesetVersion">
+            <summary>
+            TilesetVersion
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetAsset.GltfUpAxis">
+            <summary>
+            Up axis, Y or Z
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.BoundingVolume">
+            <summary>
+             bounding
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.BoundingVolume.Region">
+            <summary>
+            use region (west, south, east, north, minHeight, maxHeight)
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.BoundingVolume.Box">
+            <summary>
+            bounding box, 12
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.BoundingVolume.Sphere">
+            <summary>
+            bounding sphere, 4
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TileRegionComparer.Percent(Arctron.Obj2Gltf.MinMax,Arctron.Obj2Gltf.MinMax)">
+            <summary>
+            near / far
+            </summary>
+            <param name="m1"></param>
+            <param name="m2"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesOptions.MergeTileJsonFiles">
+            <summary>
+            whether to merge tileset.json files. 
+            if true, only one tileset.json file will be generated, 
+            all the b3dm files will be root's first level children
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesOptions.WriteChildTileJson">
+            <summary>
+            keep children b3dm tileset.json
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesOptions.OutputFolder">
+            <summary>
+            converted tiles folder
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.TilesConverter">
+            <summary>
+            tileset converter
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesConverter.MergeTileJsonFiles">
+            <summary>
+            whether to merge tileset.json files. 
+            if true, only one tileset.json file will be generated, 
+            all the b3dm files will be root's first level children
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesConverter.WriteChildTileJson">
+            <summary>
+            keep children b3dm tileset.json
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.#ctor(System.String,System.String,Arctron.Obj23dTiles.GisPosition)">
+            <summary>
+            
+            </summary>
+            <param name="objFolder">folder contains obj files</param>
+            <param name="outputFolder">tiles output folder</param>
+            <param name="gisPosition">where the tiles are</param>        
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.#ctor(System.String,System.Collections.Generic.ICollection{Arctron.Obj2Gltf.WaveFront.ObjModel},Arctron.Obj23dTiles.GisPosition,Arctron.Obj23dTiles.TilesOptions)">
+            <summary>
+            
+            </summary>
+            <param name="objFolder">all objModels should be in this folder</param>
+            <param name="objModels"></param>
+            <param name="gisPosition"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.Run(System.Boolean)">
+            <summary>
+            run converter
+            </summary>
+            <param name="lod">whether generate hierarchical tileset.json</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.MergeTilesets(System.String,System.String,Arctron.Obj23dTiles.GisPosition,System.Boolean,System.Boolean,Arctron.Obj2Gltf.WaveFront.ObjModel[])">
+            <summary>
+            when converted, merge tileset.json
+            </summary>
+            <param name="outputFolder">tiles output folder</param>
+            <param name="gisPosition">where the tiles are</param>
+            <param name="lod">whether generate hierarchical tileset.json</param>
+            <param name="writeChildTilesetJson">keep children b3dm tileset.json</param>
+            <param name="objModels">obj file list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.MergeTilesets(System.String,Arctron.Obj23dTiles.GisPosition,System.Boolean,System.Boolean,System.String[])">
+            <summary>
+            when converted, merge tileset.json
+            </summary>
+            <param name="outputFolder">tiles output folder</param>
+            <param name="gisPosition">where the tiles are</param>
+            <param name="lod">whether generate hierarchical tileset.json</param>
+            <param name="writeChildTilesetJson">keep children b3dm tileset.json</param>
+            <param name="objFiles">obj file list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.CombineTilesets(System.String,Arctron.Obj23dTiles.GisPosition,System.String[])">
+            <summary>
+            when converted, combine tileset.json
+            </summary>
+            <param name="outputFolder">tiles output folder</param>
+            <param name="gisPosition">where the tiles are</param>
+            <param name="objFiles">obj file list</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.WriteTileset(System.String,System.String,Arctron.Obj23dTiles.GisPosition)">
+            <summary>
+            when converted, generate tileset
+            </summary>
+            <param name="objFile">obj file path</param>
+            <param name="outputPath">output folder</param>
+            <param name="gisPosition">where the obj model positioned</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.WriteTilesetFile(System.String,System.String,Arctron.Obj23dTiles.GisPosition)">
+            <summary>
+            when converted, generate tileset.json
+            </summary>
+            <param name="objFile">obj file path</param>
+            <param name="outputPath">output folder</param>
+            <param name="gisPosition">where the obj model positioned</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.WriteTilesetFile(Arctron.Obj2Gltf.WaveFront.ObjModel,System.String,System.String,Arctron.Obj23dTiles.GisPosition)">
+            <summary>
+            when converted, generate tileset.json
+            </summary>
+            <param name="objModel">Parsed obj Model</param>
+            <param name="outputPath">output folder</param>
+            <param name="gisPosition">where the obj model positioned</param>
+            <returns></returns>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.TilesConverter.WriteB3dm(System.String,System.String,Arctron.Obj23dTiles.Options)">
+            <summary>
+            convert to b3dm file
+            </summary>
+            <param name="objFile">obj file path</param>
+            <param name="outputFile">b3dm file path</param>
+            <param name="options">converting options</param>
+            <returns></returns>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.GisPosition">
+            <summary>
+            Gis Position
+            </summary>
+        </member>
+        <member name="M:Arctron.Obj23dTiles.GisPosition.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="lonDegree">Longitude in degrees</param>
+            <param name="latDegree">Latitude in degrees</param>
+            <param name="transHeight">Tile origin's height in meters.</param>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.GisPosition.Longitude">
+            <summary>
+            Tile origin's(models' point (0,0,0)) longitude in radian.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.GisPosition.Latitude">
+            <summary>
+            Tile origin's latitude in radian.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.GisPosition.TransHeight">
+            <summary>
+            Tile origin's height in meters.
+            </summary>
+        </member>
+        <member name="T:Arctron.Obj23dTiles.TilesetCreationOptions">
+            <summary>
+            generated when convert b3dm data
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.TileName">
+            <summary>
+            The tile name of root.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.Longitude">
+            <summary>
+            The longitute of tile origin point.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.Latitude">
+            <summary>
+            The latitute of tile origin point
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.MinHeight">
+            <summary>
+            The minimum height of the tile.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.MaxHeight">
+            <summary>
+            The maximum height of the tile.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.TileWidth">
+            <summary>
+            The horizontal length (cross longitude) of tile.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.TileHeight">
+            <summary>
+            The vertical length (cross latitude) of tile.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.TransHeight">
+            <summary>
+            The transform height of the tile.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.GltfUpAxis">
+            <summary>
+            The up axis of model. X, Y, Z
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.GeometricError">
+            <summary>
+            The geometric error of tile.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.Transfrom">
+            <summary>
+            The tile transform.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.UseRegion">
+            <summary>
+            Using region bounding volume.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.UseBox">
+            <summary>
+            Using box bounding volume.
+            </summary>
+        </member>
+        <member name="P:Arctron.Obj23dTiles.TilesetCreationOptions.UseSphere">
+            <summary>
+            Using sphere bounding volume.
+            </summary>
+        </member>
+    </members>
+</doc>

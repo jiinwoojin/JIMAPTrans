@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E306504-FA6A-41C4-9DC3-4894334D966F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>JIMapTrans</RootNamespace>
+    <AssemblyName>JIMap-Trans</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>unnamed.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLineArgumentsParser, Version=3.0.20.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineArgumentsParser.3.0.20\lib\net452\CommandLineArgumentsParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetZip">
+      <HintPath>..\depends\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="DotSpatial.Projections, Version=1.9.0.0, Culture=neutral, PublicKeyToken=272632bddd08a38b, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotSpatial.Projections.1.9\lib\net40-Client\DotSpatial.Projections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="gdalconst_csharp, Version=1.0.7185.31850, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\depends\gdal-3.0.1\gdalconst_csharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gdal_csharp, Version=1.0.7198.1396, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\depends\gdal-3.0.1\gdal_csharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="IPAddressControlLib">
+      <HintPath>..\depends\IPAddressControlLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ogr_csharp, Version=1.0.7185.31848, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\depends\gdal-3.0.1\ogr_csharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="osr_csharp, Version=1.0.7185.31847, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
+      <HintPath>..\depends\gdal-3.0.1\osr_csharp.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="YamlDotNet, Version=8.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.8.1.2\lib\net45\YamlDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CommonUtil.cs" />
+    <Compile Include="Common\PathType.cs" />
+    <Compile Include="DataUpdate\NModel3DConverterArgumentList.cs" />
+    <Compile Include="GdalConfig\GdalEnum.cs" />
+    <Compile Include="MapConvert\MapConvertOptionManager.cs" />
+    <Compile Include="DataUpdate\DataUpdateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataUpdate\DataUpdateControl.Designer.cs">
+      <DependentUpon>DataUpdateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataUpdate\MapUpdateInfo.cs" />
+    <Compile Include="Process\ProcessResultInfo.cs" />
+    <Compile Include="Options\CreationOptionList.cs" />
+    <Compile Include="GdalConfig\GdalConfiguration.cs" />
+    <Compile Include="GdalConfig\GdalConfigManager.cs" />
+    <Compile Include="GdalConfig\GdalHandlers.cs" />
+    <Compile Include="GdalConfig\GdalRasterFileFormat.cs" />
+    <Compile Include="Options\OptionItem.cs" />
+    <Compile Include="Options\OptionProfile.cs" />
+    <Compile Include="Logger\LoggerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Logger\LoggerControl.Designer.cs">
+      <DependentUpon>LoggerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logger\LoggerManager.cs" />
+    <Compile Include="Logger\RichTextBoxAppender.cs" />
+    <Compile Include="Logger\RichTextBoxLevelStyle.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapConvert\MapConvertControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapConvert\MapConvertControl.Designer.cs">
+      <DependentUpon>MapConvertControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapConvert\MapConvertDataSource.cs" />
+    <Compile Include="MapConvert\MapConverter.cs" />
+    <Compile Include="MapConvert\MapConvertInfo.cs" />
+    <Compile Include="MapConvert\MapConvertOptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapConvert\MapConvertOptionControl.Designer.cs">
+      <DependentUpon>MapConvertOptionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MapConvert\MapConvertOptionEnum.cs" />
+    <Compile Include="Common\PathInfo.cs" />
+    <Compile Include="MapConvert\MapConvertPathSettingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MapConvert\MapConvertPathSettingControl.Designer.cs">
+      <DependentUpon>MapConvertPathSettingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Overview\OverviewCreateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Overview\OverviewCreateControl.Designer.cs">
+      <DependentUpon>OverviewCreateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Overview\OverviewCreateInfo.cs" />
+    <Compile Include="Overview\OverviewCreateOptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Overview\OverviewCreateOptionControl.Designer.cs">
+      <DependentUpon>OverviewCreateOptionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Overview\OverviewCreatePathSettingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Overview\OverviewCreatePathSettingControl.Designer.cs">
+      <DependentUpon>OverviewCreatePathSettingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Overview\OverviewCreator.cs" />
+    <Compile Include="Overview\OverviewDataSource.cs" />
+    <Compile Include="Overview\OverviewOptionEnum.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vrt\VrtCreateControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vrt\VrtCreateControl.Designer.cs">
+      <DependentUpon>VrtCreateControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vrt\VrtCreateInfo.cs" />
+    <Compile Include="Vrt\VrtCreateOptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vrt\VrtCreateOptionControl.Designer.cs">
+      <DependentUpon>VrtCreateOptionControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vrt\VrtCreatePathSettingControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vrt\VrtCreatePathSettingControl.Designer.cs">
+      <DependentUpon>VrtCreatePathSettingControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vrt\VrtCreator.cs" />
+    <Content Include="GdalConfig\GdalConfiguration.vb" />
+    <Content Include="unnamed.ico" />
+    <EmbeddedResource Include="Logger\LoggerControl.resx">
+      <DependentUpon>LoggerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapConvert\MapConvertControl.resx">
+      <DependentUpon>MapConvertControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapConvert\MapConvertOptionControl.resx">
+      <DependentUpon>MapConvertOptionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MapConvert\MapConvertPathSettingControl.resx">
+      <DependentUpon>MapConvertPathSettingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataUpdate\DataUpdateControl.resx">
+      <DependentUpon>DataUpdateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Overview\OverviewCreateControl.resx">
+      <DependentUpon>OverviewCreateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Overview\OverviewCreateOptionControl.resx">
+      <DependentUpon>OverviewCreateOptionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Overview\OverviewCreatePathSettingControl.resx">
+      <DependentUpon>OverviewCreatePathSettingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Vrt\VrtCreateControl.resx">
+      <DependentUpon>VrtCreateControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vrt\VrtCreateOptionControl.resx">
+      <DependentUpon>VrtCreateOptionControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vrt\VrtCreatePathSettingControl.resx">
+      <DependentUpon>VrtCreatePathSettingControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="3DSConvert\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model3DConversion.Models\Model3DConversion.Models.csproj">
+      <Project>{f985148d-8cb4-4549-aecd-23e3b7b11688}</Project>
+      <Name>Model3DConversion.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(SolutionDir)\depends\gdal-3.0.1\gdal" "$(TargetDir)\gdal\" /Y /E</PostBuildEvent>
+  </PropertyGroup>
+</Project>
