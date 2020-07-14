@@ -1119,7 +1119,7 @@ namespace JIMapTrans.DataUpdate
         #region 삭제예정
 
         private List<String> GetFileList(String rootPath, List<String> fileList)
-        {
+        {// test
             if (fileList == null)
             {
                 return null;
