@@ -1,2 +1,6 @@
 ﻿# Created by .ignore support plugin (hsz.mobi)
 .idea/
+.vs/
+JINetMapManager/bin/
+JINetMapManager/obj/
+Model3DConversion.Models/obj/
