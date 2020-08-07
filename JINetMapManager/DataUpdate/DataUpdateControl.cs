@@ -514,7 +514,7 @@ namespace JIMapTrans.DataUpdate
                 {
                     _dic_file.Clear();
                     LoggerManager.WriteInfoLogDate("압축 파일 목록을 정리합니다.");
-                    GetFiles(Path.GetDirectoryName(_mapUpdateInfo.zipPath), _dic_file);
+                    GetFiles(Path.GetDirectoryName(_mapUpdateInfo.ZipPath), _dic_file);
                     CreateYaml("");
                 }            
 
@@ -573,14 +573,14 @@ namespace JIMapTrans.DataUpdate
             if (MapDataRadioButton.Checked)
             {
                 string mapType = GetMapType();
-                _mapUpdateInfo.guid = Guid.NewGuid();
-                fileName = mapType + "_" + _mapUpdateInfo.guid.ToString();
+                _mapUpdateInfo.Guid = Guid.NewGuid();
+                fileName = mapType + "_" + _mapUpdateInfo.Guid.ToString();
 
-                _mapUpdateInfo.fileName = fileName;
-                _mapUpdateInfo.map_type = mapType;
-                _mapUpdateInfo.filePath = InputPathTextBox.Text;
-                _mapUpdateInfo.zipPath = Path.Combine(Application.StartupPath, "temp", fileName, fileName + ".zip");
-                _mapUpdateInfo.agentPath = AgentPathTextBox.Text;
+                _mapUpdateInfo.FileName = fileName;
+                _mapUpdateInfo.MapName = mapType;
+                _mapUpdateInfo.FilePath = InputPathTextBox.Text;
+                _mapUpdateInfo.ZipPath = Path.Combine(Application.StartupPath, "temp", fileName, fileName + ".zip");
+                _mapUpdateInfo.AgentPath = AgentPathTextBox.Text;
             }
             else
             {
@@ -607,7 +607,7 @@ namespace JIMapTrans.DataUpdate
         private void TempDelete()
         {
             _dic_file.Clear();
-            GetFiles(Path.GetDirectoryName(_mapUpdateInfo.zipPath), _dic_file);
+            GetFiles(Path.GetDirectoryName(_mapUpdateInfo.ZipPath), _dic_file);
             int count = 1;
             foreach(DictionaryEntry dic in _dic_file)
             {
@@ -622,7 +622,7 @@ namespace JIMapTrans.DataUpdate
                 count++;
             }
 
-            string temp_path = Path.GetDirectoryName(_mapUpdateInfo.zipPath);
+            string temp_path = Path.GetDirectoryName(_mapUpdateInfo.ZipPath);
 
             if(Directory.Exists(temp_path))
             {
@@ -748,9 +748,9 @@ namespace JIMapTrans.DataUpdate
         {
             using (Ionic.Zip.ZipFile zip = new Ionic.Zip.ZipFile())
             {
-                if (!Directory.Exists(Path.GetDirectoryName(_mapUpdateInfo.zipPath)))
+                if (!Directory.Exists(Path.GetDirectoryName(_mapUpdateInfo.ZipPath)))
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(_mapUpdateInfo.zipPath));
+                    Directory.CreateDirectory(Path.GetDirectoryName(_mapUpdateInfo.ZipPath));
                 }
 
                 long size = (1024 * 1024) * (int)compressSizecUpDown.Value;
@@ -759,10 +759,10 @@ namespace JIMapTrans.DataUpdate
                 //zip.AlternateEncoding = Encoding.UTF8;
                 zip.SaveProgress += zipProgress;
                 LoggerManager.WriteInfoLogDate("업데이트 파일을 압축리스트에 추가합니다.");
-                zip.AddDirectory(_mapUpdateInfo.filePath, _mapUpdateInfo.fileName);
+                zip.AddDirectory(_mapUpdateInfo.FilePath, _mapUpdateInfo.FileName);
                 zip.MaxOutputSegmentSize64 = size;
                 LoggerManager.WriteInfoLogDate("업데이트 파일 압축을 시작합니다.");
-                zip.Save(_mapUpdateInfo.zipPath);
+                zip.Save(_mapUpdateInfo.ZipPath);
             }
         }
 
@@ -895,8 +895,8 @@ namespace JIMapTrans.DataUpdate
                                 {
                                     if (_uploadCount > 0)
                                     {
-                                        string zip_path = Path.GetDirectoryName(_mapUpdateInfo.zipPath);
-                                        string yaml_name = _mapUpdateInfo.fileName + "_cancel.yaml";
+                                        string zip_path = Path.GetDirectoryName(_mapUpdateInfo.ZipPath);
+                                        string yaml_name = _mapUpdateInfo.FileName + "_cancel.yaml";
                                         string yaml_path = Path.Combine(zip_path, yaml_name);
                                         SftpUpload(yaml_path, "cancel");
                                     }
@@ -956,8 +956,8 @@ namespace JIMapTrans.DataUpdate
 
         public void FileCopy()
         {
-            string input_path = Path.GetDirectoryName(_mapUpdateInfo.zipPath);
-            string output_path = _mapUpdateInfo.agentPath;
+            string input_path = Path.GetDirectoryName(_mapUpdateInfo.ZipPath);
+            string output_path = _mapUpdateInfo.AgentPath;
 
             byte[] buffer = new byte[1024 * 1024]; // 1MB buffer
                                                    
@@ -1037,16 +1037,16 @@ namespace JIMapTrans.DataUpdate
 
         private void FileCopyCancel()
         {
-            string zip_path = Path.GetDirectoryName(_mapUpdateInfo.zipPath);
-            string yaml_name = _mapUpdateInfo.fileName  + "_cancel.yaml";
-            string yaml_path = Path.Combine(zip_path, yaml_name);
-            string copy_path = Path.Combine(_mapUpdateInfo.agentPath, yaml_name);
-            File.Copy(yaml_path, copy_path);
+            string zipPath = Path.GetDirectoryName(_mapUpdateInfo.ZipPath);
+            string yamlName = _mapUpdateInfo.FileName  + "_cancel.yaml";
+            string yamlPath = Path.Combine(zipPath, yamlName);
+            string copyPath = Path.Combine(_mapUpdateInfo.AgentPath, yamlPath);
+            File.Copy(yamlPath, copyPath);
         }
 
         private void CreateYaml(string type)
         {
-            string str = _mapUpdateInfo.guid.ToString();
+            string str = _mapUpdateInfo.Guid.ToString();
             string initialContent = "\nkey: " + str + "\n";
 
             var sr = new StringReader(initialContent);
@@ -1055,11 +1055,11 @@ namespace JIMapTrans.DataUpdate
 
             var rootMappingNode = (YamlMappingNode)stream.Documents[0].RootNode;
 
-            rootMappingNode.Add("map_kind", _mapUpdateInfo.map_type);
+            rootMappingNode.Add("map_name", _mapUpdateInfo.MapName);
 
             if(type.ToLower() != "_cancel")
             {
-                string dataKind = _mapUpdateInfo.map_type.Substring(0, 1);
+                string dataKind = _mapUpdateInfo.MapName.Substring(0, 1);
                 
                 rootMappingNode.Add("data_kind", dataKind);
                 rootMappingNode.Add("file_count", _dic_file.Count.ToString());
@@ -1077,21 +1077,21 @@ namespace JIMapTrans.DataUpdate
                 rootMappingNode.Add("files", seq);
             }
 
-            string zip_path = Path.GetDirectoryName(_mapUpdateInfo.zipPath);
-            string yaml_name = _mapUpdateInfo.fileName  + type +".yaml";
-            string yaml_path = Path.Combine(zip_path, yaml_name);
+            string zipPath = Path.GetDirectoryName(_mapUpdateInfo.ZipPath);
+            string yamlName = _mapUpdateInfo.FileName  + type +".yaml";
+            string yamlPath = Path.Combine(zipPath, yamlName);
 
             try
             {
-                using (TextWriter writer = File.CreateText(yaml_path))
+                using (TextWriter writer = File.CreateText(yamlPath))
                 {
                     stream.Save(writer, false);
                 }
 
                 if (type.ToLower() != "_cancel")
                 {
-                    FileInfo file = new FileInfo(yaml_path);
-                    _dic_file.Insert(0, yaml_path, file.Length);
+                    FileInfo file = new FileInfo(yamlPath);
+                    _dic_file.Insert(0, yamlPath, file.Length);
                     //_dic_file.Add(yaml_path, file.Length);
                 }
             }
