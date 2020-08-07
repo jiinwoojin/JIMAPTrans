@@ -1059,7 +1059,10 @@ namespace JIMapTrans.DataUpdate
 
             if(type.ToLower() != "_cancel")
             {
-                rootMappingNode.Add("count", _dic_file.Count.ToString());
+                string dataKind = _mapUpdateInfo.map_type.Substring(0, 1);
+                
+                rootMappingNode.Add("data_kind", dataKind);
+                rootMappingNode.Add("file_count", _dic_file.Count.ToString());
 
                 var seq = new YamlSequenceNode();
 
