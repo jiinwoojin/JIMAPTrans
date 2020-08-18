@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using JIMapTrans.Common;
-using System.IO.Compression;
 using System.IO;
 using Renci.SshNet;
 using DotSpatial.Projections;
@@ -754,6 +750,7 @@ namespace JIMapTrans.DataUpdate
                 }
 
                 long size = (1024 * 1024) * (int)compressSizecUpDown.Value;
+                zip.CompressionMethod = Ionic.Zip.CompressionMethod.Deflate;
                 zip.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
                 zip.ProvisionalAlternateEncoding = Encoding.UTF8;
                 //zip.AlternateEncoding = Encoding.UTF8;
