@@ -7,5 +7,7 @@ Model3DConversion.Models/obj/
 obj
 /*.user
 .vs
+/bin/
 /bin/AnyD
 /src/packages
+packages
