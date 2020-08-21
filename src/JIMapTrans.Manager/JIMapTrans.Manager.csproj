@@ -66,7 +66,7 @@
     </Reference>
     <Reference Include="DotNetZip, Version=1.13.8.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\solution\JIMapTrans\JIMapTrans.Dependencies\DotNetZip.dll</HintPath>
+      <HintPath>..\JIMapTrans.Dependencies\DotNetZip.dll</HintPath>
     </Reference>
     <Reference Include="DotSpatial.Projections, Version=1.9.0.0, Culture=neutral, PublicKeyToken=272632bddd08a38b, processorArchitecture=MSIL">
       <HintPath>..\packages\DotSpatial.Projections.1.9\lib\net40-Client\DotSpatial.Projections.dll</HintPath>
@@ -74,15 +74,15 @@
     </Reference>
     <Reference Include="gdalconst_csharp, Version=1.0.7198.1396, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\solution\JIMapTrans\JIMapTrans.Dependencies\gdalconst_csharp.dll</HintPath>
+      <HintPath>..\JIMapTrans.Dependencies\gdalconst_csharp.dll</HintPath>
     </Reference>
     <Reference Include="gdal_csharp, Version=1.0.7198.1396, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\solution\JIMapTrans\JIMapTrans.Dependencies\gdal_csharp.dll</HintPath>
+      <HintPath>..\JIMapTrans.Dependencies\gdal_csharp.dll</HintPath>
     </Reference>
     <Reference Include="IPAddressControlLib, Version=1.1.3039.21560, Culture=neutral, PublicKeyToken=55e96405d8fd6d61, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\solution\JIMapTrans\JIMapTrans.Dependencies\IPAddressControlLib.dll</HintPath>
+      <HintPath>..\JIMapTrans.Dependencies\IPAddressControlLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
@@ -92,11 +92,11 @@
     </Reference>
     <Reference Include="ogr_csharp, Version=1.0.7198.1395, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\solution\JIMapTrans\JIMapTrans.Dependencies\ogr_csharp.dll</HintPath>
+      <HintPath>..\JIMapTrans.Dependencies\ogr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="osr_csharp, Version=1.0.7198.1395, Culture=neutral, PublicKeyToken=db5a52b08dc5b321, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\solution\JIMapTrans\JIMapTrans.Dependencies\osr_csharp.dll</HintPath>
+      <HintPath>..\JIMapTrans.Dependencies\osr_csharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
